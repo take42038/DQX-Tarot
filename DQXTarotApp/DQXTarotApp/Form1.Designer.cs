@@ -41,13 +41,14 @@
             // 
             // cmbRank
             // 
+            this.cmbRank.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbRank.Font = new System.Drawing.Font("MS UI Gothic", 13.875F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.cmbRank.FormattingEnabled = true;
+            this.cmbRank.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.cmbRank.Location = new System.Drawing.Point(359, 92);
             this.cmbRank.Name = "cmbRank";
             this.cmbRank.Size = new System.Drawing.Size(445, 45);
             this.cmbRank.TabIndex = 0;
-            this.cmbRank.Text = "ーーーーーーー";
             this.cmbRank.SelectionChangeCommitted += new System.EventHandler(this.cmbRank_SelectionChangeCommitted);
             // 
             // lblRank
@@ -74,13 +75,13 @@
             // 
             // cmbMonster
             // 
+            this.cmbMonster.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbMonster.Font = new System.Drawing.Font("MS UI Gothic", 13.875F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.cmbMonster.FormattingEnabled = true;
             this.cmbMonster.Location = new System.Drawing.Point(359, 200);
             this.cmbMonster.Name = "cmbMonster";
             this.cmbMonster.Size = new System.Drawing.Size(445, 45);
             this.cmbMonster.TabIndex = 3;
-            this.cmbMonster.Text = "ランクを選択してください";
             // 
             // lblBaseMonsterA
             // 
@@ -120,6 +121,7 @@
             this.txtBoxSozaiA.Font = new System.Drawing.Font("MS UI Gothic", 13.875F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.txtBoxSozaiA.Location = new System.Drawing.Point(293, 401);
             this.txtBoxSozaiA.Name = "txtBoxSozaiA";
+            this.txtBoxSozaiA.ReadOnly = true;
             this.txtBoxSozaiA.Size = new System.Drawing.Size(289, 44);
             this.txtBoxSozaiA.TabIndex = 5;
             // 
@@ -128,6 +130,7 @@
             this.txtBoxSozaiB.Font = new System.Drawing.Font("MS UI Gothic", 13.875F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.txtBoxSozaiB.Location = new System.Drawing.Point(933, 401);
             this.txtBoxSozaiB.Name = "txtBoxSozaiB";
+            this.txtBoxSozaiB.ReadOnly = true;
             this.txtBoxSozaiB.Size = new System.Drawing.Size(289, 44);
             this.txtBoxSozaiB.TabIndex = 5;
             // 

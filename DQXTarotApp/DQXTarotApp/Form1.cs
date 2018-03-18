@@ -56,7 +56,7 @@ namespace DQXTarotApp
         private void Form1_Load(object sender, EventArgs e)
         {
 
-            cmbRank.Text = "ランクを選択してください。";
+            //cmbRank.Text = "ランクを選択してください。";
 
             //iniファイルのパス設定
             path = Application.StartupPath + Path.DirectorySeparatorChar + "Monster.ini";
@@ -119,8 +119,7 @@ namespace DQXTarotApp
                     }
 
                 }
-                cmbMonster.Text = "モンスターを選択してください。";
-
+                cmbMonster.SelectedIndex = 0;
             }
             //選択されたランクが”すべて”以外の場合
             else
@@ -134,15 +133,15 @@ namespace DQXTarotApp
                     //取得したキー名一覧をコンボボックスに設定
                     string resultKey = Encoding.Default.GetString(ar1, 0, length - 1);
                     Array.ForEach<String>(resultKey.Split(new[] { '\0' }, StringSplitOptions.RemoveEmptyEntries), strMonster => cmbMonster.Items.Add(strMonster));
-                    cmbMonster.Text = "モンスターを選択してください。";
+                    cmbMonster.SelectedIndex = 0;
                 }
                 //キーが取得できなかった場合
                 else
                 {
                     cmbMonster.SelectedIndex = -1;
                     cmbMonster.Items.Clear();
-                    cmbMonster.Items.Add("");
-                    cmbMonster.Text = "対象モンスターが見つかりません。";
+                    cmbMonster.Items.Add("対象モンスターが見つかりません。");
+                    cmbMonster.SelectedIndex = 0;
                 }
                 
             }
@@ -156,48 +155,102 @@ namespace DQXTarotApp
                 return;
             }
 
-            //選択されたモンスター名［ランク］からランクを抽出
+            //選択されたモンスター名（ランク）を設定
             string orgStr = cmbMonster.SelectedItem.ToString();
-            string str1 = "(";
-            string str2 = ")";
-            int orgLen = orgStr.Length; //原文の文字列の長さ
-            int str1Len = str1.Length; //str1の長さ
-            int str1Num = orgStr.IndexOf(str1); //str1が原文のどの位置にあるか
 
-            string strSelectRank = orgStr.Remove(0, str1Num + str1Len); //原文の初めからstr1のある位置まで削除
-            int str2Num = strSelectRank.IndexOf(str2); //str2がsのどの位置にあるか
-            //ランクを設定
-            strSelectRank = strSelectRank.Remove(str2Num); //sのstr2のある位置から最後まで削除
+            //素材判定関数 CheckSozaiHantei(）呼び出し
+            int intRtn = CheckSozaiHantei(path, orgStr, out string strSozaiMonster1, out string strSozaiMonster2);
 
-            //モンスター名を設定
-//            string strSelectMonster = orgStr.Remove(str1Num);
-            string strSelectMonster = cmbMonster.SelectedItem.ToString();
-
-
-            StringBuilder sb = new StringBuilder(1024);
-            GetPrivateProfileString(strSelectRank, strSelectMonster,
-                    "error", sb, (uint)sb.Capacity, path);
- 
-            string[] strAryMonster;
-
-            if (sb.ToString() != "error")
+            //関数の戻り値が正常の場合
+            if (intRtn == 0)
             {
-                //取得したセクション名一覧を配列へ退避
-                strAryMonster = sb.ToString().Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries);
-
-                txtBoxSozaiA.Text = strAryMonster[0];
-                txtBoxSozaiB.Text = strAryMonster[1];
-
+                //テキストボックスに素材モンスター名を設定
+                txtBoxSozaiA.Text = strSozaiMonster1;
+                txtBoxSozaiB.Text = strSozaiMonster2;
             }
             else
+            //関数の戻り値が異常の場合
             {
+                //テキストボックスをクリア
                 txtBoxSozaiA.Text = "";
                 txtBoxSozaiB.Text = "";
             }
 
+        }
 
+        public int CheckSozaiHantei(string IniFilePath,string InParm,out string OutParm1,out string OutParm2)
+        {
+            //機能　：合成後のモンスター名を入力し、iniファイルから素材となるモンスター名を検索する。
+            //引数１：入力　iniファイルのフルパス　
+            //引数２：入力　合成モンスター　
+            //引数３：出力　素材モンスター１
+            //引数４：出力　素材モンスター２
+            //戻り値：正常終了（0）、異常終了（-1）
 
+            try
+            {
+                //引数２の”モンスター名（ランク）”からランクだけを抽出
+                //検索文字列設定
+                string str1 = "(";
+                string str2 = ")";
+                //引数２の合成モンスター名の文字列の長さ
+                int orgLen = InParm.Length;
+                //str1の長さ
+                int str1Len = str1.Length;
+                //str1が原文のどの位置にあるか
+                int str1Num = InParm.IndexOf(str1); 
+                //原文の初めからstr1のある位置まで削除
+                string strSection = InParm.Remove(0, str1Num + str1Len); 
+                //str2がどの位置にあるか
+                int str2Num = strSection.IndexOf(str2);
+                //str2のある位置から最後まで削除して、セクション名にランクを設定
+                strSection = strSection.Remove(str2Num); 
+
+                //キー名にモンスター名を設定
+                string strKey = cmbMonster.SelectedItem.ToString();
+
+                StringBuilder sb = new StringBuilder(1024);
+
+                //iniファイルから指定したセクションのキーの値を読み込む
+                GetPrivateProfileString(
+                    strSection,             //セクション名 
+                    strKey,                 //キー名
+                    "error",                //読み込めなかった時の設定値
+                    sb,                     //読み込んだキーの値
+                    (uint)sb.Capacity,      //読み込んだキーの値のサイズ
+                    IniFilePath             //iniファイルのフルパス
+                    );
+
+                string[] strAryValue;
+
+                if (sb.ToString() != "error")
+                {
+                    //取得したキーの値を配列へ退避
+                    strAryValue = sb.ToString().Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries);
+                    //引数３の出力１へ設定
+                    OutParm1 = strAryValue[0];
+                    //引数４の出力２へ設定
+                    OutParm2 = strAryValue[1];
+
+                }
+                else
+                {
+                    //キーの値が取得できなかった場合
+                    OutParm1 = "";
+                    OutParm2 = "";
+                }
+
+                return 0;
+
+            }
+            catch
+            {
+                OutParm1 = "";
+                OutParm2 = "";
+                return -1;
+            }
 
         }
+
     }
 }
