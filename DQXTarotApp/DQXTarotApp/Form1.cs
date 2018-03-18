@@ -79,10 +79,10 @@ namespace DQXTarotApp
                     //取得したセクション名一覧をコンボボックスに設定
                     Array.ForEach<String>(resultSection.Split(new[] { '\0' },StringSplitOptions.RemoveEmptyEntries), strRank => cmbRank.Items.Add(strRank));
 
-
+/* すべてのランクをいったん廃止
                     //コンボボックスの一番上に”すべて”を追加
                     cmbRank.Items.Insert(0, "すべて");                    
-
+*/
                 }
 
                 Marshal.FreeHGlobal(ptr);
@@ -106,29 +106,31 @@ namespace DQXTarotApp
             //選択されたランクを設定
             string strSelectRank = cmbRank.SelectedItem.ToString();
 
-            //選択されたランクが”すべて”の場合
-            if (strSelectRank == "すべて")
-            {
-                //退避していたセクション名一覧（全ランク）分のキー名一覧を取得
-                foreach (string s in strArySection)
-                {
-                    int lengthAll = GetPrivateProfileStringByByteArray(s, null, "", ar1, 1024, path);
-                    if (0 < lengthAll)
-                    {
-                        //取得したキー名一覧をコンボボックスに設定
-                        string resultKey = Encoding.Default.GetString(ar1, 0, lengthAll - 1);
-                        Array.ForEach<String>(resultKey.Split(new[] { '\0' }, StringSplitOptions.RemoveEmptyEntries), strMonster => cmbMonster.Items.Add(strMonster));
-                    }
+            /* すべてのランクをいったん廃止
+                        //選択されたランクが”すべて”の場合
+                        if (strSelectRank == "すべて")
+                        {
+                            //退避していたセクション名一覧（全ランク）分のキー名一覧を取得
+                            foreach (string s in strArySection)
+                            {
+                                int lengthAll = GetPrivateProfileStringByByteArray(s, null, "", ar1, 1024, path);
+                                if (0 < lengthAll)
+                                {
+                                    //取得したキー名一覧をコンボボックスに設定
+                                    string resultKey = Encoding.Default.GetString(ar1, 0, lengthAll - 1);
+                                    Array.ForEach<String>(resultKey.Split(new[] { '\0' }, StringSplitOptions.RemoveEmptyEntries), strMonster => cmbMonster.Items.Add(strMonster));
+                                }
 
-                }
-                cmbMonster.Text = "モンスターを選択してください。";
+                            }
+                            cmbMonster.Text = "モンスターを選択してください。";
 
-            }
-            //選択されたランクが”すべて”以外の場合
-            else
+                        }
+                        //選択されたランクが”すべて”以外の場合
+                        else
             {
-                //選択されたランクのセクションのキー名一覧を取得
-                int length = GetPrivateProfileStringByByteArray(strSelectRank, null, "", ar1, 1024, path);
+            */
+            //選択されたランクのセクションのキー名一覧を取得
+            int length = GetPrivateProfileStringByByteArray(strSelectRank, null, "", ar1, 1024, path);
 
                 //キーが取得できた場合
                 if (0 < length)
@@ -147,7 +149,7 @@ namespace DQXTarotApp
                     cmbMonster.Text = "対象モンスターが見つかりません。";
                 }
                 
-            }
+//            }
 
         }
 
