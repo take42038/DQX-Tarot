@@ -79,6 +79,7 @@ namespace DQXTarotApp
                     //取得したセクション名一覧をコンボボックスに設定
                     Array.ForEach<String>(resultSection.Split(new[] { '\0' },StringSplitOptions.RemoveEmptyEntries), strRank => cmbRank.Items.Add(strRank));
 
+
                     //コンボボックスの一番上に”すべて”を追加
                     cmbRank.Items.Insert(0, "すべて");                    
 
@@ -95,6 +96,8 @@ namespace DQXTarotApp
         {
             cmbMonster.Items.Clear();
             cmbMonster.Text = "";
+            txtBoxSozaiA.Text = "";
+            txtBoxSozaiB.Text = "";
 
             // iniファイルより指定したセクションのキー一覧を取得
             //IntPtr ptr = Marshal.StringToHGlobalAnsi(new String('\0', 1024));
@@ -148,6 +151,41 @@ namespace DQXTarotApp
 
         }
 
+        private void btnSozai_Click(object sender, EventArgs e)
+        {
+            if ((cmbRank.SelectedIndex == -1) || (cmbMonster.SelectedIndex == -1))
+            {
+                return;
+            }
+            //選択されたランクを設定
+            string strSelectRank = cmbRank.SelectedItem.ToString();
+            //選択されたモンスターを設定
+            string strSelectMonster = cmbMonster.SelectedItem.ToString();
 
+            StringBuilder sb = new StringBuilder(1024);
+            GetPrivateProfileString(strSelectRank, strSelectMonster,
+                    "error", sb, (uint)sb.Capacity, path);
+ 
+            string[] strAryMonster;
+
+            if (sb.ToString() != "error")
+            {
+                //取得したセクション名一覧を配列へ退避
+                strAryMonster = sb.ToString().Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries);
+
+                txtBoxSozaiA.Text = strAryMonster[0];
+                txtBoxSozaiB.Text = strAryMonster[1];
+
+            }
+            else
+            {
+                txtBoxSozaiA.Text = "";
+                txtBoxSozaiB.Text = "";
+            }
+
+
+
+
+        }
     }
 }

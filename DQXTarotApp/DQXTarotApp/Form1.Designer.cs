@@ -32,6 +32,11 @@
             this.lblRank = new System.Windows.Forms.Label();
             this.lblMonster = new System.Windows.Forms.Label();
             this.cmbMonster = new System.Windows.Forms.ComboBox();
+            this.lblBaseMonsterA = new System.Windows.Forms.Label();
+            this.lblBaseMonsterB = new System.Windows.Forms.Label();
+            this.btnSozai = new System.Windows.Forms.Button();
+            this.txtBoxSozaiA = new System.Windows.Forms.TextBox();
+            this.txtBoxSozaiB = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // cmbRank
@@ -77,11 +82,65 @@
             this.cmbMonster.TabIndex = 3;
             this.cmbMonster.Text = "ランクを選択してください";
             // 
+            // lblBaseMonsterA
+            // 
+            this.lblBaseMonsterA.AutoSize = true;
+            this.lblBaseMonsterA.Font = new System.Drawing.Font("MS UI Gothic", 13.875F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.lblBaseMonsterA.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.lblBaseMonsterA.Location = new System.Drawing.Point(12, 404);
+            this.lblBaseMonsterA.Name = "lblBaseMonsterA";
+            this.lblBaseMonsterA.Size = new System.Drawing.Size(254, 37);
+            this.lblBaseMonsterA.TabIndex = 2;
+            this.lblBaseMonsterA.Text = "素材モンスターA";
+            // 
+            // lblBaseMonsterB
+            // 
+            this.lblBaseMonsterB.AutoSize = true;
+            this.lblBaseMonsterB.Font = new System.Drawing.Font("MS UI Gothic", 13.875F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.lblBaseMonsterB.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.lblBaseMonsterB.Location = new System.Drawing.Point(661, 404);
+            this.lblBaseMonsterB.Name = "lblBaseMonsterB";
+            this.lblBaseMonsterB.Size = new System.Drawing.Size(255, 37);
+            this.lblBaseMonsterB.TabIndex = 2;
+            this.lblBaseMonsterB.Text = "素材モンスターB";
+            // 
+            // btnSozai
+            // 
+            this.btnSozai.Font = new System.Drawing.Font("MS UI Gothic", 13.875F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.btnSozai.Location = new System.Drawing.Point(466, 285);
+            this.btnSozai.Name = "btnSozai";
+            this.btnSozai.Size = new System.Drawing.Size(209, 72);
+            this.btnSozai.TabIndex = 4;
+            this.btnSozai.Text = "合成素材";
+            this.btnSozai.UseVisualStyleBackColor = true;
+            this.btnSozai.Click += new System.EventHandler(this.btnSozai_Click);
+            // 
+            // txtBoxSozaiA
+            // 
+            this.txtBoxSozaiA.Font = new System.Drawing.Font("MS UI Gothic", 13.875F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.txtBoxSozaiA.Location = new System.Drawing.Point(293, 401);
+            this.txtBoxSozaiA.Name = "txtBoxSozaiA";
+            this.txtBoxSozaiA.Size = new System.Drawing.Size(289, 44);
+            this.txtBoxSozaiA.TabIndex = 5;
+            // 
+            // txtBoxSozaiB
+            // 
+            this.txtBoxSozaiB.Font = new System.Drawing.Font("MS UI Gothic", 13.875F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.txtBoxSozaiB.Location = new System.Drawing.Point(933, 401);
+            this.txtBoxSozaiB.Name = "txtBoxSozaiB";
+            this.txtBoxSozaiB.Size = new System.Drawing.Size(289, 44);
+            this.txtBoxSozaiB.TabIndex = 5;
+            // 
             // frmMain
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
-            this.ClientSize = new System.Drawing.Size(1174, 529);
+            this.ClientSize = new System.Drawing.Size(1257, 529);
+            this.Controls.Add(this.txtBoxSozaiB);
+            this.Controls.Add(this.txtBoxSozaiA);
+            this.Controls.Add(this.btnSozai);
             this.Controls.Add(this.cmbMonster);
+            this.Controls.Add(this.lblBaseMonsterB);
+            this.Controls.Add(this.lblBaseMonsterA);
             this.Controls.Add(this.lblMonster);
             this.Controls.Add(this.lblRank);
             this.Controls.Add(this.cmbRank);
@@ -102,6 +161,11 @@
         private System.Windows.Forms.Label lblRank;
         private System.Windows.Forms.Label lblMonster;
         private System.Windows.Forms.ComboBox cmbMonster;
+        private System.Windows.Forms.Label lblBaseMonsterA;
+        private System.Windows.Forms.Label lblBaseMonsterB;
+        private System.Windows.Forms.Button btnSozai;
+        private System.Windows.Forms.TextBox txtBoxSozaiA;
+        private System.Windows.Forms.TextBox txtBoxSozaiB;
     }
 }
 
