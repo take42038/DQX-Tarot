@@ -79,10 +79,8 @@ namespace DQXTarotApp
                     //取得したセクション名一覧をコンボボックスに設定
                     Array.ForEach<String>(resultSection.Split(new[] { '\0' },StringSplitOptions.RemoveEmptyEntries), strRank => cmbRank.Items.Add(strRank));
 
-/* すべてのランクをいったん廃止
                     //コンボボックスの一番上に”すべて”を追加
                     cmbRank.Items.Insert(0, "すべて");                    
-*/
                 }
 
                 Marshal.FreeHGlobal(ptr);
@@ -106,29 +104,27 @@ namespace DQXTarotApp
             //選択されたランクを設定
             string strSelectRank = cmbRank.SelectedItem.ToString();
 
-            /* すべてのランクをいったん廃止
-                        //選択されたランクが”すべて”の場合
-                        if (strSelectRank == "すべて")
-                        {
-                            //退避していたセクション名一覧（全ランク）分のキー名一覧を取得
-                            foreach (string s in strArySection)
-                            {
-                                int lengthAll = GetPrivateProfileStringByByteArray(s, null, "", ar1, 1024, path);
-                                if (0 < lengthAll)
-                                {
-                                    //取得したキー名一覧をコンボボックスに設定
-                                    string resultKey = Encoding.Default.GetString(ar1, 0, lengthAll - 1);
-                                    Array.ForEach<String>(resultKey.Split(new[] { '\0' }, StringSplitOptions.RemoveEmptyEntries), strMonster => cmbMonster.Items.Add(strMonster));
-                                }
-
-                            }
-                            cmbMonster.Text = "モンスターを選択してください。";
-
-                        }
-                        //選択されたランクが”すべて”以外の場合
-                        else
+            //選択されたランクが”すべて”の場合
+            if (strSelectRank == "すべて")
             {
-            */
+                //退避していたセクション名一覧（全ランク）分のキー名一覧を取得
+                foreach (string s in strArySection)
+                {
+                    int lengthAll = GetPrivateProfileStringByByteArray(s, null, "", ar1, 1024, path);
+                    if (0 < lengthAll)
+                    {
+                        //取得したキー名一覧をコンボボックスに設定
+                        string resultKey = Encoding.Default.GetString(ar1, 0, lengthAll - 1);
+                        Array.ForEach<String>(resultKey.Split(new[] { '\0' }, StringSplitOptions.RemoveEmptyEntries), strMonster => cmbMonster.Items.Add(strMonster));
+                    }
+
+                }
+                cmbMonster.Text = "モンスターを選択してください。";
+
+            }
+            //選択されたランクが”すべて”以外の場合
+            else
+            {
             //選択されたランクのセクションのキー名一覧を取得
             int length = GetPrivateProfileStringByByteArray(strSelectRank, null, "", ar1, 1024, path);
 
@@ -149,7 +145,7 @@ namespace DQXTarotApp
                     cmbMonster.Text = "対象モンスターが見つかりません。";
                 }
                 
-//            }
+            }
 
         }
 
@@ -159,10 +155,24 @@ namespace DQXTarotApp
             {
                 return;
             }
-            //選択されたランクを設定
-            string strSelectRank = cmbRank.SelectedItem.ToString();
-            //選択されたモンスターを設定
+
+            //選択されたモンスター名［ランク］からランクを抽出
+            string orgStr = cmbMonster.SelectedItem.ToString();
+            string str1 = "(";
+            string str2 = ")";
+            int orgLen = orgStr.Length; //原文の文字列の長さ
+            int str1Len = str1.Length; //str1の長さ
+            int str1Num = orgStr.IndexOf(str1); //str1が原文のどの位置にあるか
+
+            string strSelectRank = orgStr.Remove(0, str1Num + str1Len); //原文の初めからstr1のある位置まで削除
+            int str2Num = strSelectRank.IndexOf(str2); //str2がsのどの位置にあるか
+            //ランクを設定
+            strSelectRank = strSelectRank.Remove(str2Num); //sのstr2のある位置から最後まで削除
+
+            //モンスター名を設定
+//            string strSelectMonster = orgStr.Remove(str1Num);
             string strSelectMonster = cmbMonster.SelectedItem.ToString();
+
 
             StringBuilder sb = new StringBuilder(1024);
             GetPrivateProfileString(strSelectRank, strSelectMonster,
