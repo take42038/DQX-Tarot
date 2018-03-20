@@ -95,7 +95,10 @@ namespace DQXTarotApp
         private void cmbRank_SelectionChangeCommitted(object sender, EventArgs e)
         {
             cmbMonster.Items.Clear();
-            cmbMonster.Text = "";
+            cmbMonster.Items.Add("");
+            cmbMonster.SelectedIndex = 0;
+
+//            cmbMonster.Text = "";
             txtBoxSozai_2_1.Text = "";
             txtBoxSozai_2_2.Text = "";
 
@@ -121,7 +124,7 @@ namespace DQXTarotApp
                     }
 
                 }
-                cmbMonster.SelectedIndex = 0;
+                cmbMonster.SelectedIndex = -1;
             }
             //選択されたランクが”すべて”以外の場合
             else
@@ -145,7 +148,8 @@ namespace DQXTarotApp
                     cmbMonster.Items.Add("対象モンスターが見つかりません。");
                     cmbMonster.SelectedIndex = 0;
                 }
-                
+                cmbMonster.SelectedIndex = -1;
+
             }
 
         }
@@ -427,11 +431,40 @@ namespace DQXTarotApp
         }
         private void cmbMonster_SelectedIndexChanged(object sender, EventArgs e)
         {
+
+            if ((cmbRank.SelectedIndex == -1) || (cmbMonster.SelectedIndex == -1))
+            {
+                return;
+            }
+
+            //選択されたモンスター名（ランク）を設定
+            string orgStr = cmbMonster.SelectedItem.ToString();
+
             //モンスター名取得
-            string strImageFile = jpgPath + cmbMonster.Text + @".jpg";
+            //tring strImageFile = jpgPath + orgStr + @".jpg";
 
             //モンスター名の画像を表示する
-            pictBox_1_1.ImageLocation = strImageFile;
+            pictBox_1_1.ImageLocation = jpgPath + orgStr + @".jpg"; 
+
+            //素材判定関数 CheckSozaiHantei(）呼び出し
+            int intRtn = CheckSozaiHantei(iniPath, orgStr, out string strSozaiMonster1, out string strSozaiMonster2);
+
+            //関数の戻り値が正常の場合
+            if (intRtn == 0)
+            {
+                //テキストボックスに素材モンスター名を設定
+                txtBoxSozai_2_1.Text = strSozaiMonster1;
+                txtBoxSozai_2_2.Text = strSozaiMonster2;
+            }
+            else
+            //関数の戻り値が異常の場合
+            {
+                //テキストボックスをクリア
+                txtBoxSozai_2_1.Text = "";
+                txtBoxSozai_2_2.Text = "";
+            }
+
+
         }
 
 

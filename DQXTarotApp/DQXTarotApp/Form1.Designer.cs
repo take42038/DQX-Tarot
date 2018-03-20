@@ -32,7 +32,6 @@
             this.lblRank = new System.Windows.Forms.Label();
             this.lblMonster = new System.Windows.Forms.Label();
             this.cmbMonster = new System.Windows.Forms.ComboBox();
-            this.btnSozai = new System.Windows.Forms.Button();
             this.txtBoxSozai_2_1 = new System.Windows.Forms.TextBox();
             this.txtBoxSozai_2_2 = new System.Windows.Forms.TextBox();
             this.txtBoxSozai_3_1 = new System.Windows.Forms.TextBox();
@@ -127,18 +126,6 @@
             this.cmbMonster.Size = new System.Drawing.Size(224, 45);
             this.cmbMonster.TabIndex = 3;
             this.cmbMonster.SelectedIndexChanged += new System.EventHandler(this.cmbMonster_SelectedIndexChanged);
-            // 
-            // btnSozai
-            // 
-            this.btnSozai.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.btnSozai.Font = new System.Drawing.Font("MS UI Gothic", 13.875F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.btnSozai.Location = new System.Drawing.Point(716, 225);
-            this.btnSozai.Name = "btnSozai";
-            this.btnSozai.Size = new System.Drawing.Size(430, 42);
-            this.btnSozai.TabIndex = 4;
-            this.btnSozai.Text = "合成素材判定";
-            this.btnSozai.UseVisualStyleBackColor = true;
-            this.btnSozai.Click += new System.EventHandler(this.btnSozai_Click);
             // 
             // txtBoxSozai_2_1
             // 
@@ -297,6 +284,7 @@
             // pictBox_1_1
             // 
             this.pictBox_1_1.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.pictBox_1_1.ErrorImage = null;
             this.pictBox_1_1.Location = new System.Drawing.Point(852, 43);
             this.pictBox_1_1.Name = "pictBox_1_1";
             this.pictBox_1_1.Size = new System.Drawing.Size(132, 129);
@@ -469,7 +457,6 @@
             this.Controls.Add(this.txtBoxSozai_4_1);
             this.Controls.Add(this.txtBoxSozai_4_8);
             this.Controls.Add(this.lblMonster);
-            this.Controls.Add(this.btnSozai);
             this.Controls.Add(this.txtBoxSozai_2_1);
             this.Controls.Add(this.txtBoxSozai_3_1);
             this.Controls.Add(this.txtBoxSozai_2_2);
@@ -514,7 +501,6 @@
         private System.Windows.Forms.Label lblRank;
         private System.Windows.Forms.Label lblMonster;
         private System.Windows.Forms.ComboBox cmbMonster;
-        private System.Windows.Forms.Button btnSozai;
         private System.Windows.Forms.TextBox txtBoxSozai_2_1;
         private System.Windows.Forms.TextBox txtBoxSozai_2_2;
         private System.Windows.Forms.TextBox txtBoxSozai_3_1;
