@@ -43,8 +43,10 @@ namespace DQXTarotApp
             uint nSize,
             string lpFileName);
 
-        public string path;
+        public string iniPath;
         public string[] strArySection;
+        public string jpgPath;
+
 
         public frmMain()
         {
@@ -56,16 +58,16 @@ namespace DQXTarotApp
         private void Form1_Load(object sender, EventArgs e)
         {
 
-            //cmbRank.Text = "ランクを選択してください。";
-
             //iniファイルのパス設定
-            path = Application.StartupPath + Path.DirectorySeparatorChar + "Monster.ini";
-            
-            if (File.Exists(path))
+            iniPath = Application.StartupPath + Path.DirectorySeparatorChar + "Monster.ini";
+            //jpgファイルのパス設定
+            jpgPath = Application.StartupPath + Path.DirectorySeparatorChar + @"image\";
+
+            if (File.Exists(iniPath))
             {
                 // iniファイルよりセクション名一覧を取得
                 IntPtr ptr = Marshal.StringToHGlobalAnsi(new String('\0', 1024));
-                int length = GetPrivateProfileSectionNames(ptr, 1024, path);
+                int length = GetPrivateProfileSectionNames(ptr, 1024, iniPath);
 
                 //セクション名が取得できたら
                 if (0 < length)
@@ -94,8 +96,8 @@ namespace DQXTarotApp
         {
             cmbMonster.Items.Clear();
             cmbMonster.Text = "";
-            txtBoxSozaiA.Text = "";
-            txtBoxSozaiB.Text = "";
+            txtBoxSozai_2_1.Text = "";
+            txtBoxSozai_2_2.Text = "";
 
             // iniファイルより指定したセクションのキー一覧を取得
             //IntPtr ptr = Marshal.StringToHGlobalAnsi(new String('\0', 1024));
@@ -110,7 +112,7 @@ namespace DQXTarotApp
                 //退避していたセクション名一覧（全ランク）分のキー名一覧を取得
                 foreach (string s in strArySection)
                 {
-                    int lengthAll = GetPrivateProfileStringByByteArray(s, null, "", ar1, 1024, path);
+                    int lengthAll = GetPrivateProfileStringByByteArray(s, null, "", ar1, 1024, iniPath);
                     if (0 < lengthAll)
                     {
                         //取得したキー名一覧をコンボボックスに設定
@@ -125,7 +127,7 @@ namespace DQXTarotApp
             else
             {
             //選択されたランクのセクションのキー名一覧を取得
-            int length = GetPrivateProfileStringByByteArray(strSelectRank, null, "", ar1, 1024, path);
+            int length = GetPrivateProfileStringByByteArray(strSelectRank, null, "", ar1, 1024, iniPath);
 
                 //キーが取得できた場合
                 if (0 < length)
@@ -159,26 +161,26 @@ namespace DQXTarotApp
             string orgStr = cmbMonster.SelectedItem.ToString();
 
             //素材判定関数 CheckSozaiHantei(）呼び出し
-            int intRtn = CheckSozaiHantei(path, orgStr, out string strSozaiMonster1, out string strSozaiMonster2);
+            int intRtn = CheckSozaiHantei(iniPath, orgStr, out string strSozaiMonster1, out string strSozaiMonster2);
 
             //関数の戻り値が正常の場合
             if (intRtn == 0)
             {
                 //テキストボックスに素材モンスター名を設定
-                txtBoxSozaiA.Text = strSozaiMonster1;
-                txtBoxSozaiB.Text = strSozaiMonster2;
+                txtBoxSozai_2_1.Text = strSozaiMonster1;
+                txtBoxSozai_2_2.Text = strSozaiMonster2;
             }
             else
             //関数の戻り値が異常の場合
             {
                 //テキストボックスをクリア
-                txtBoxSozaiA.Text = "";
-                txtBoxSozaiB.Text = "";
+                txtBoxSozai_2_1.Text = "";
+                txtBoxSozai_2_2.Text = "";
             }
 
         }
 
-        public int CheckSozaiHantei(string IniFilePath,string InParm,out string OutParm1,out string OutParm2)
+        private int CheckSozaiHantei(string IniFilePath,string InParm,out string OutParm1,out string OutParm2)
         {
             //機能　：合成後のモンスター名を入力し、iniファイルから素材となるモンスター名を検索する。
             //引数１：入力　iniファイルのフルパス　
@@ -207,7 +209,7 @@ namespace DQXTarotApp
                 strSection = strSection.Remove(str2Num); 
 
                 //キー名にモンスター名を設定
-                string strKey = cmbMonster.SelectedItem.ToString();
+                string strKey = InParm;
 
                 StringBuilder sb = new StringBuilder(1024);
 
@@ -252,5 +254,266 @@ namespace DQXTarotApp
 
         }
 
+        private void txtBoxSozai_2_1_TextChanged(object sender, EventArgs e)
+        {
+            //選択されたモンスター名（ランク）を設定
+            string orgStr = txtBoxSozai_2_1.Text; 
+
+            //モンスター名の画像を表示する
+            pictBox_2_1.ImageLocation = jpgPath + orgStr + @".jpg";
+
+
+            //素材判定関数 CheckSozaiHantei(）呼び出し
+            int intRtn = CheckSozaiHantei(iniPath, orgStr, out string strSozaiMonster1, out string strSozaiMonster2);
+
+            //関数の戻り値が正常の場合
+            if (intRtn == 0)
+            {
+                //テキストボックスに素材モンスター名を設定
+                txtBoxSozai_3_1.Text = strSozaiMonster1;
+                txtBoxSozai_3_2.Text = strSozaiMonster2;
+            }
+            else
+            //関数の戻り値が異常の場合
+            {
+                //テキストボックスをクリア
+                txtBoxSozai_3_1.Text = "";
+                txtBoxSozai_3_2.Text = "";
+            }
+
+
+        }
+
+        private void txtBoxSozai_2_2_TextChanged(object sender, EventArgs e)
+        {
+            //選択されたモンスター名（ランク）を設定
+            string orgStr = txtBoxSozai_2_2.Text;
+
+            //モンスター名の画像を表示する
+            pictBox_2_2.ImageLocation = jpgPath + orgStr + @".jpg";
+
+            //素材判定関数 CheckSozaiHantei(）呼び出し
+            int intRtn = CheckSozaiHantei(iniPath, orgStr, out string strSozaiMonster1, out string strSozaiMonster2);
+
+            //関数の戻り値が正常の場合
+            if (intRtn == 0)
+            {
+                //テキストボックスに素材モンスター名を設定
+                txtBoxSozai_3_3.Text = strSozaiMonster1;
+                txtBoxSozai_3_4.Text = strSozaiMonster2;
+            }
+            else
+            //関数の戻り値が異常の場合
+            {
+                //テキストボックスをクリア
+                txtBoxSozai_3_3.Text = "";
+                txtBoxSozai_3_4.Text = "";
+            }
+
+
+
+        }
+
+        private void txtBoxSozai_3_1_TextChanged(object sender, EventArgs e)
+        {
+            //選択されたモンスター名（ランク）を設定
+            string orgStr = txtBoxSozai_3_1.Text;
+
+            //モンスター名の画像を表示する
+            pictBox_3_1.ImageLocation = jpgPath + orgStr + @".jpg";
+
+            //素材判定関数 CheckSozaiHantei(）呼び出し
+            int intRtn = CheckSozaiHantei(iniPath, orgStr, out string strSozaiMonster1, out string strSozaiMonster2);
+
+            //関数の戻り値が正常の場合
+            if (intRtn == 0)
+            {
+                //テキストボックスに素材モンスター名を設定
+                txtBoxSozai_4_1.Text = strSozaiMonster1;
+                txtBoxSozai_4_2.Text = strSozaiMonster2;
+            }
+            else
+            //関数の戻り値が異常の場合
+            {
+                //テキストボックスをクリア
+                txtBoxSozai_4_1.Text = "";
+                txtBoxSozai_4_2.Text = "";
+            }
+
+        }
+
+        private void txtBoxSozai_3_2_TextChanged(object sender, EventArgs e)
+        {
+            //選択されたモンスター名（ランク）を設定
+            string orgStr = txtBoxSozai_3_2.Text;
+
+            //モンスター名の画像を表示する
+            pictBox_3_2.ImageLocation = jpgPath + orgStr + @".jpg";
+
+            //素材判定関数 CheckSozaiHantei(）呼び出し
+            int intRtn = CheckSozaiHantei(iniPath, orgStr, out string strSozaiMonster1, out string strSozaiMonster2);
+
+            //関数の戻り値が正常の場合
+            if (intRtn == 0)
+            {
+                //テキストボックスに素材モンスター名を設定
+                txtBoxSozai_4_3.Text = strSozaiMonster1;
+                txtBoxSozai_4_4.Text = strSozaiMonster2;
+            }
+            else
+            //関数の戻り値が異常の場合
+            {
+                //テキストボックスをクリア
+                txtBoxSozai_4_3.Text = "";
+                txtBoxSozai_4_4.Text = "";
+            }
+
+        }
+
+        private void txtBoxSozai_3_3_TextChanged(object sender, EventArgs e)
+        {
+            //選択されたモンスター名（ランク）を設定
+            string orgStr = txtBoxSozai_3_3.Text;
+
+            //モンスター名の画像を表示する
+            pictBox_3_3.ImageLocation = jpgPath + orgStr + @".jpg";
+
+            //素材判定関数 CheckSozaiHantei(）呼び出し
+            int intRtn = CheckSozaiHantei(iniPath, orgStr, out string strSozaiMonster1, out string strSozaiMonster2);
+
+            //関数の戻り値が正常の場合
+            if (intRtn == 0)
+            {
+                //テキストボックスに素材モンスター名を設定
+                txtBoxSozai_4_5.Text = strSozaiMonster1;
+                txtBoxSozai_4_6.Text = strSozaiMonster2;
+            }
+            else
+            //関数の戻り値が異常の場合
+            {
+                //テキストボックスをクリア
+                txtBoxSozai_4_5.Text = "";
+                txtBoxSozai_4_6.Text = "";
+            }
+
+        }
+
+        private void txtBoxSozai_3_4_TextChanged(object sender, EventArgs e)
+        {
+            //選択されたモンスター名（ランク）を設定
+            string orgStr = txtBoxSozai_3_4.Text;
+
+            //モンスター名の画像を表示する
+            pictBox_3_4.ImageLocation = jpgPath + orgStr + @".jpg";
+
+            //素材判定関数 CheckSozaiHantei(）呼び出し
+            int intRtn = CheckSozaiHantei(iniPath, orgStr, out string strSozaiMonster1, out string strSozaiMonster2);
+
+            //関数の戻り値が正常の場合
+            if (intRtn == 0)
+            {
+                //テキストボックスに素材モンスター名を設定
+                txtBoxSozai_4_7.Text = strSozaiMonster1;
+                txtBoxSozai_4_8.Text = strSozaiMonster2;
+            }
+            else
+            //関数の戻り値が異常の場合
+            {
+                //テキストボックスをクリア
+                txtBoxSozai_4_7.Text = "";
+                txtBoxSozai_4_8.Text = "";
+            }
+
+        }
+        private void cmbMonster_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            //モンスター名取得
+            string strImageFile = jpgPath + cmbMonster.Text + @".jpg";
+
+            //モンスター名の画像を表示する
+            pictBox_1_1.ImageLocation = strImageFile;
+        }
+
+
+        private void txtBoxSozai_4_1_TextChanged(object sender, EventArgs e)
+        {
+            //選択されたモンスター名（ランク）を設定
+            string orgStr = txtBoxSozai_4_1.Text;
+
+            //モンスター名の画像を表示する
+            pictBox_4_1.ImageLocation = jpgPath + orgStr + @".jpg";
+
+
+        }
+
+        private void txtBoxSozai_4_2_TextChanged(object sender, EventArgs e)
+        {
+            //選択されたモンスター名（ランク）を設定
+            string orgStr = txtBoxSozai_4_2.Text;
+
+            //モンスター名の画像を表示する
+            pictBox_4_2.ImageLocation = jpgPath + orgStr + @".jpg";
+
+        }
+
+        private void txtBoxSozai_4_3_TextChanged(object sender, EventArgs e)
+        {
+            //選択されたモンスター名（ランク）を設定
+            string orgStr = txtBoxSozai_4_3.Text;
+
+            //モンスター名の画像を表示する
+            pictBox_4_3.ImageLocation = jpgPath + orgStr + @".jpg";
+
+        }
+
+        private void txtBoxSozai_4_4_TextChanged(object sender, EventArgs e)
+        {
+            //選択されたモンスター名（ランク）を設定
+            string orgStr = txtBoxSozai_4_4.Text;
+
+            //モンスター名の画像を表示する
+            pictBox_4_4.ImageLocation = jpgPath + orgStr + @".jpg";
+
+        }
+
+        private void txtBoxSozai_4_5_TextChanged(object sender, EventArgs e)
+        {
+            //選択されたモンスター名（ランク）を設定
+            string orgStr = txtBoxSozai_4_5.Text;
+
+            //モンスター名の画像を表示する
+            pictBox_4_5.ImageLocation = jpgPath + orgStr + @".jpg";
+
+        }
+
+        private void txtBoxSozai_4_6_TextChanged(object sender, EventArgs e)
+        {
+            //選択されたモンスター名（ランク）を設定
+            string orgStr = txtBoxSozai_4_6.Text;
+
+            //モンスター名の画像を表示する
+            pictBox_4_6.ImageLocation = jpgPath + orgStr + @".jpg";
+
+        }
+
+        private void txtBoxSozai_4_7_TextChanged(object sender, EventArgs e)
+        {
+            //選択されたモンスター名（ランク）を設定
+            string orgStr = txtBoxSozai_4_7.Text;
+
+            //モンスター名の画像を表示する
+            pictBox_4_7.ImageLocation = jpgPath + orgStr + @".jpg";
+
+        }
+
+        private void txtBoxSozai_4_8_TextChanged(object sender, EventArgs e)
+        {
+            //選択されたモンスター名（ランク）を設定
+            string orgStr = txtBoxSozai_4_8.Text;
+
+            //モンスター名の画像を表示する
+            pictBox_4_8.ImageLocation = jpgPath + orgStr + @".jpg";
+
+        }
     }
 }
