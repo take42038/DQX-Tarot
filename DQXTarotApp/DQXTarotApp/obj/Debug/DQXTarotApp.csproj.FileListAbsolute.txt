@@ -1,10 +1,13 @@
 C:\Users\takeshi\Documents\DQX Tarot\DQXTarotApp\DQXTarotApp\bin\Debug\DQXTarotApp.exe.config
 C:\Users\takeshi\Documents\DQX Tarot\DQXTarotApp\DQXTarotApp\bin\Debug\DQXTarotApp.exe
 C:\Users\takeshi\Documents\DQX Tarot\DQXTarotApp\DQXTarotApp\bin\Debug\DQXTarotApp.pdb
-C:\Users\takeshi\Documents\DQX Tarot\DQXTarotApp\DQXTarotApp\obj\Debug\DQXTarotApp.csprojResolveAssemblyReference.cache
+C:\Users\takeshi\Documents\DQX Tarot\DQXTarotApp\DQXTarotApp\obj\Debug\DQXTarotApp.frmMain.resources
 C:\Users\takeshi\Documents\DQX Tarot\DQXTarotApp\DQXTarotApp\obj\Debug\DQXTarotApp.Properties.Resources.resources
-C:\Users\takeshi\Documents\DQX Tarot\DQXTarotApp\DQXTarotApp\obj\Debug\DQXTarotApp.csproj.GenerateResource.Cache
+C:\Users\takeshi\Documents\DQX Tarot\DQXTarotApp\DQXTarotApp\obj\Debug\DQXTarotApp.csproj.GenerateResource.cache
 C:\Users\takeshi\Documents\DQX Tarot\DQXTarotApp\DQXTarotApp\obj\Debug\DQXTarotApp.csproj.CoreCompileInputs.cache
 C:\Users\takeshi\Documents\DQX Tarot\DQXTarotApp\DQXTarotApp\obj\Debug\DQXTarotApp.exe
 C:\Users\takeshi\Documents\DQX Tarot\DQXTarotApp\DQXTarotApp\obj\Debug\DQXTarotApp.pdb
-C:\Users\takeshi\Documents\DQX Tarot\DQXTarotApp\DQXTarotApp\obj\Debug\DQXTarotApp.frmMain.resources
+C:\Users\takeshi\Documents\DQX Tarot\DQXTarotApp\DQXTarotApp\bin\Debug\Microsoft.VisualBasic.PowerPacks.dll
+C:\Users\takeshi\Documents\DQX Tarot\DQXTarotApp\DQXTarotApp\bin\Debug\ja\Microsoft.VisualBasic.PowerPacks.resources.dll
+C:\Users\takeshi\Documents\DQX Tarot\DQXTarotApp\DQXTarotApp\obj\Debug\DQXTarotApp.csprojResolveAssemblyReference.cache
+C:\Users\takeshi\Documents\DQX Tarot\DQXTarotApp\DQXTarotApp\obj\Debug\DQXTarotApp.csproj.CopyComplete

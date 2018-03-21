@@ -51,6 +51,7 @@ namespace DQXTarotApp
         public frmMain()
         {
             InitializeComponent();
+            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(255))))) ;
         }
 
 
@@ -154,35 +155,35 @@ namespace DQXTarotApp
 
         }
 
-        private void btnSozai_Click(object sender, EventArgs e)
-        {
-            if ((cmbRank.SelectedIndex == -1) || (cmbMonster.SelectedIndex == -1))
-            {
-                return;
-            }
+        //private void btnSozai_Click(object sender, EventArgs e)
+        //{
+        //    if ((cmbRank.SelectedIndex == -1) || (cmbMonster.SelectedIndex == -1))
+        //    {
+        //        return;
+        //    }
 
-            //選択されたモンスター名（ランク）を設定
-            string orgStr = cmbMonster.SelectedItem.ToString();
+        //    //選択されたモンスター名（ランク）を設定
+        //    string orgStr = cmbMonster.SelectedItem.ToString();
 
-            //素材判定関数 CheckSozaiHantei(）呼び出し
-            int intRtn = CheckSozaiHantei(iniPath, orgStr, out string strSozaiMonster1, out string strSozaiMonster2);
+        //    //素材判定関数 CheckSozaiHantei(）呼び出し
+        //    int intRtn = CheckSozaiHantei(iniPath, orgStr, out string strSozaiMonster1, out string strSozaiMonster2);
 
-            //関数の戻り値が正常の場合
-            if (intRtn == 0)
-            {
-                //テキストボックスに素材モンスター名を設定
-                txtBoxSozai_2_1.Text = strSozaiMonster1;
-                txtBoxSozai_2_2.Text = strSozaiMonster2;
-            }
-            else
-            //関数の戻り値が異常の場合
-            {
-                //テキストボックスをクリア
-                txtBoxSozai_2_1.Text = "";
-                txtBoxSozai_2_2.Text = "";
-            }
+        //    //関数の戻り値が正常の場合
+        //    if (intRtn == 0)
+        //    {
+        //        //テキストボックスに素材モンスター名を設定
+        //        txtBoxSozai_2_1.Text = strSozaiMonster1;
+        //        txtBoxSozai_2_2.Text = strSozaiMonster2;
+        //    }
+        //    else
+        //    //関数の戻り値が異常の場合
+        //    {
+        //        //テキストボックスをクリア
+        //        txtBoxSozai_2_1.Text = "";
+        //        txtBoxSozai_2_2.Text = "";
+        //    }
 
-        }
+        //}
 
         private int CheckSozaiHantei(string IniFilePath,string InParm,out string OutParm1,out string OutParm2)
         {
@@ -276,6 +277,8 @@ namespace DQXTarotApp
                 //テキストボックスに素材モンスター名を設定
                 txtBoxSozai_3_1.Text = strSozaiMonster1;
                 txtBoxSozai_3_2.Text = strSozaiMonster2;
+                line2_1.Visible = true;
+                line2_2.Visible = true;
             }
             else
             //関数の戻り値が異常の場合
@@ -283,6 +286,8 @@ namespace DQXTarotApp
                 //テキストボックスをクリア
                 txtBoxSozai_3_1.Text = "";
                 txtBoxSozai_3_2.Text = "";
+                line2_1.Visible = false;
+                line2_2.Visible = false;
             }
 
 
@@ -305,6 +310,8 @@ namespace DQXTarotApp
                 //テキストボックスに素材モンスター名を設定
                 txtBoxSozai_3_3.Text = strSozaiMonster1;
                 txtBoxSozai_3_4.Text = strSozaiMonster2;
+                line2_3.Visible = true;
+                line2_4.Visible = true;
             }
             else
             //関数の戻り値が異常の場合
@@ -312,6 +319,8 @@ namespace DQXTarotApp
                 //テキストボックスをクリア
                 txtBoxSozai_3_3.Text = "";
                 txtBoxSozai_3_4.Text = "";
+                line2_3.Visible = false;
+                line2_4.Visible = false;
             }
 
 
@@ -335,6 +344,8 @@ namespace DQXTarotApp
                 //テキストボックスに素材モンスター名を設定
                 txtBoxSozai_4_1.Text = strSozaiMonster1;
                 txtBoxSozai_4_2.Text = strSozaiMonster2;
+                line3_1.Visible = true;
+                line3_2.Visible = true;
             }
             else
             //関数の戻り値が異常の場合
@@ -342,6 +353,8 @@ namespace DQXTarotApp
                 //テキストボックスをクリア
                 txtBoxSozai_4_1.Text = "";
                 txtBoxSozai_4_2.Text = "";
+                line3_1.Visible = false;
+                line3_2.Visible = false;
             }
 
         }
@@ -363,6 +376,8 @@ namespace DQXTarotApp
                 //テキストボックスに素材モンスター名を設定
                 txtBoxSozai_4_3.Text = strSozaiMonster1;
                 txtBoxSozai_4_4.Text = strSozaiMonster2;
+                line3_3.Visible = true;
+                line3_4.Visible = true;
             }
             else
             //関数の戻り値が異常の場合
@@ -370,6 +385,8 @@ namespace DQXTarotApp
                 //テキストボックスをクリア
                 txtBoxSozai_4_3.Text = "";
                 txtBoxSozai_4_4.Text = "";
+                line3_3.Visible = false;
+                line3_4.Visible = false;
             }
 
         }
@@ -391,6 +408,8 @@ namespace DQXTarotApp
                 //テキストボックスに素材モンスター名を設定
                 txtBoxSozai_4_5.Text = strSozaiMonster1;
                 txtBoxSozai_4_6.Text = strSozaiMonster2;
+                line3_5.Visible = true;
+                line3_6.Visible = true;
             }
             else
             //関数の戻り値が異常の場合
@@ -398,6 +417,8 @@ namespace DQXTarotApp
                 //テキストボックスをクリア
                 txtBoxSozai_4_5.Text = "";
                 txtBoxSozai_4_6.Text = "";
+                line3_5.Visible = false;
+                line3_6.Visible = false;
             }
 
         }
@@ -419,6 +440,8 @@ namespace DQXTarotApp
                 //テキストボックスに素材モンスター名を設定
                 txtBoxSozai_4_7.Text = strSozaiMonster1;
                 txtBoxSozai_4_8.Text = strSozaiMonster2;
+                line3_7.Visible = true;
+                line3_8.Visible = true;
             }
             else
             //関数の戻り値が異常の場合
@@ -426,6 +449,8 @@ namespace DQXTarotApp
                 //テキストボックスをクリア
                 txtBoxSozai_4_7.Text = "";
                 txtBoxSozai_4_8.Text = "";
+                line3_7.Visible = false;
+                line3_8.Visible = false;
             }
 
         }
@@ -455,6 +480,8 @@ namespace DQXTarotApp
                 //テキストボックスに素材モンスター名を設定
                 txtBoxSozai_2_1.Text = strSozaiMonster1;
                 txtBoxSozai_2_2.Text = strSozaiMonster2;
+                line1_1.Visible = true;
+                line1_2.Visible = true;
             }
             else
             //関数の戻り値が異常の場合
@@ -462,6 +489,8 @@ namespace DQXTarotApp
                 //テキストボックスをクリア
                 txtBoxSozai_2_1.Text = "";
                 txtBoxSozai_2_2.Text = "";
+                line1_1.Visible = false;
+                line1_2.Visible = false;
             }
 
 
