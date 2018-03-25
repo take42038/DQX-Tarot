@@ -10,3 +10,4 @@ C:\Users\takeshi\Documents\DQX Tarot\DQXTarotApp\DQXTarotApp\obj\Release\DQXTaro
 C:\Users\takeshi\Documents\DQX Tarot\DQXTarotApp\DQXTarotApp\bin\Release\Microsoft.VisualBasic.PowerPacks.dll
 C:\Users\takeshi\Documents\DQX Tarot\DQXTarotApp\DQXTarotApp\bin\Release\ja\Microsoft.VisualBasic.PowerPacks.resources.dll
 C:\Users\takeshi\Documents\DQX Tarot\DQXTarotApp\DQXTarotApp\obj\Release\DQXTarotApp.csproj.CopyComplete
+C:\Users\takeshi\Documents\DQX Tarot\DQXTarotApp\DQXTarotApp\obj\Release\DQXTarotApp.Form2.resources

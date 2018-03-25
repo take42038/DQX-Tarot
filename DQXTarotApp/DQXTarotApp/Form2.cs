@@ -45,10 +45,10 @@ namespace DQXTarotApp
             //ラベル作成
             lblAuto = new System.Windows.Forms.Label();
             lblAuto.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            lblAuto.Font = new System.Drawing.Font("MS UI Gothic", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            lblAuto.Font = new System.Drawing.Font("MS UI Gothic", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             lblAuto.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            lblAuto.Location = new System.Drawing.Point(100, 100);
-            lblAuto.Size = new System.Drawing.Size(180, 34);
+            lblAuto.Location = new System.Drawing.Point(10, 10);
+            lblAuto.Size = new System.Drawing.Size(100, 20);
             lblAuto.TabIndex = 8;
             lblAuto.Text = strName;
             lblAuto.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -65,11 +65,6 @@ namespace DQXTarotApp
             {
                 //子のモンスター名をテーブルレイアウトパネルに表示
                 AddMonsterNameInPanel(strSozaiMonster1, strSozaiMonster2, intNowCol, intNowRow);
-
-
-            }
-            else
-            {
 
             }
 
@@ -174,51 +169,56 @@ namespace DQXTarotApp
             //引数４：テーブルレイアウトパネルの現在位置（行）
 
 
-            if (intPnlPosRow > tblLayOutPnl.RowCount)
+            //if (intPnlPosRow > tblLayOutPnl.RowCount)
+            //{
+            //    //テーブルレイアウトパネルの現在行の後ろ挿入する。
+            //    InsertRow(intPnlPosRow);
+            //}
+
+            if (intPnlPosCol+1 >= tblLayOutPnl.ColumnCount)
             {
-                //intPnlPosRow = intPnlPosRowBK;
-                //テーブルレイアウトパネルの現在行の後ろ挿入する。
-                InsertRow(intPnlPosRow);
+                //テーブルレイアウトパネルの現在列の後ろ挿入する。
+                InsertColumn(intPnlPosCol + 1);
+//                intPnlPosColBK = intPnlPosCol + 1;
             }
-            //InsertRow(intPnlPosRow);
 
-            //intPnlPosCol = intPnlPosColBK;
 
-            //テーブルレイアウトパネルの現在列のまえに挿入する。
-            InsertColumn(intPnlPosCol);
+            ////テーブルレイアウトパネルの現在列のまえに挿入する。
+            //InsertColumn(intPnlPosCol);
+
+            //テーブルレイアウトパネルの現在行のまえに挿入する。
+            InsertRow(intPnlPosRow);
+
+            ////子１ラベル動的追加
+            //intPnlPosRowBK = intPnlPosRow + 1;
+            //AutoAddLabel(strKo1, intPnlPosCol, intPnlPosRow + 1);
 
             //子１ラベル動的追加
-            intPnlPosRowBK = intPnlPosRow + 1;
-            AutoAddLabel(strKo1, intPnlPosCol, intPnlPosRow + 1);
+            intPnlPosColBK = intPnlPosCol + 1;
+            AutoAddLabel(strKo1, intPnlPosCol+1, intPnlPosRow);
 
-            //intPnlPosColBK = intPnlPosCol;
-            //intPnlPosRowBK = intPnlPosRow + 1;
+            ////テーブルレイアウトパネルの列を追加する。
+            //intPnlPosCol = intPnlPosColBK;
 
             //テーブルレイアウトパネルの列を追加する。
-            intPnlPosCol = intPnlPosColBK;
+            intPnlPosRow = intPnlPosRowBK;
 
-            InsertColumn(intPnlPosCol + 2);
+            //InsertColumn(intPnlPosCol + 2);
+
+            InsertRow(intPnlPosRow + 2);
+
+            ////子２ラベル動的追加
+            //intPnlPosColBK += 2;
+            //AutoAddLabel(strKo2, intPnlPosCol + 2, intPnlPosRow + 1);
 
             //子２ラベル動的追加
-            intPnlPosColBK += 2;
-            AutoAddLabel(strKo2, intPnlPosCol + 2, intPnlPosRow + 1);
-
-            //intPnlPosColBK = intPnlPosCol + 2;
-            //            intPnlPosColBK += 2;
-
-        }
-
-        private void btnDetail_Click(object sender, EventArgs e)
-        {
-            Form2 form2 = new Form2();
-            form2.Show();
+            intPnlPosRowBK += 2;
+            AutoAddLabel(strKo2, intPnlPosCol + 1, intPnlPosRow + 2);
         }
 
         private void InitTableLayoutPanel()
         { 
         //テーブルレイアウトパネルクリア
-            int intPnlPosCol = 0;
-            int intPnlPosRow = 0;
             foreach (Control item in tblLayOutPnl.Controls)
             {
                 item.Dispose();

@@ -39,7 +39,7 @@
             this.tblLayOutPnl.ColumnCount = 1;
             this.tblLayOutPnl.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tblLayOutPnl.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tblLayOutPnl.Location = new System.Drawing.Point(110, 169);
+            this.tblLayOutPnl.Location = new System.Drawing.Point(26, 24);
             this.tblLayOutPnl.Name = "tblLayOutPnl";
             this.tblLayOutPnl.RowCount = 1;
             this.tblLayOutPnl.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
@@ -49,13 +49,12 @@
             // 
             // Form2
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(11F, 21F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.AutoScroll = true;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(2075, 1043);
             this.Controls.Add(this.tblLayOutPnl);
             this.Name = "Form2";
-            this.Text = "Form2";
+            this.Text = "詳細画面";
             this.Load += new System.EventHandler(this.Form2_Load);
             this.ResumeLayout(false);
             this.PerformLayout();

@@ -700,7 +700,7 @@
             // btnDetail
             // 
             this.btnDetail.Font = new System.Drawing.Font("MS UI Gothic", 20.14286F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.btnDetail.Location = new System.Drawing.Point(995, 178);
+            this.btnDetail.Location = new System.Drawing.Point(915, 89);
             this.btnDetail.Name = "btnDetail";
             this.btnDetail.Size = new System.Drawing.Size(232, 106);
             this.btnDetail.TabIndex = 9;

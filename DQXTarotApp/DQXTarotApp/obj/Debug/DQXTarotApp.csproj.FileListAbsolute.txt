@@ -9,6 +9,5 @@ C:\Users\takeshi\Documents\DQX Tarot\DQXTarotApp\DQXTarotApp\obj\Debug\DQXTarotA
 C:\Users\takeshi\Documents\DQX Tarot\DQXTarotApp\DQXTarotApp\obj\Debug\DQXTarotApp.pdb
 C:\Users\takeshi\Documents\DQX Tarot\DQXTarotApp\DQXTarotApp\bin\Debug\Microsoft.VisualBasic.PowerPacks.dll
 C:\Users\takeshi\Documents\DQX Tarot\DQXTarotApp\DQXTarotApp\bin\Debug\ja\Microsoft.VisualBasic.PowerPacks.resources.dll
-C:\Users\takeshi\Documents\DQX Tarot\DQXTarotApp\DQXTarotApp\obj\Debug\DQXTarotApp.csprojResolveAssemblyReference.cache
 C:\Users\takeshi\Documents\DQX Tarot\DQXTarotApp\DQXTarotApp\obj\Debug\DQXTarotApp.csproj.CopyComplete
 C:\Users\takeshi\Documents\DQX Tarot\DQXTarotApp\DQXTarotApp\obj\Debug\DQXTarotApp.Form2.resources

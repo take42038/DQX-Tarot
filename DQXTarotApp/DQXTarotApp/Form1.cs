@@ -48,9 +48,6 @@ namespace DQXTarotApp
         public static string jpgPath;
         public static string strName;
 
-        public int intPnlPosColBK;
-        public int intPnlPosRowBK;
-
 
         public frmMain()
         {
