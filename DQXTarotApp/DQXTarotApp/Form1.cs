@@ -47,8 +47,8 @@ namespace DQXTarotApp
         public string[] strArySection;
         public string jpgPath;
 
-        public int intPnlPosCol;
-        public int intPnlPosRow;
+        public int intPnlPosColBK;
+        public int intPnlPosRowBK;
 
 
         public frmMain()
@@ -93,9 +93,9 @@ namespace DQXTarotApp
 
             }
 
-            //現在のパネル上のポジション
-            intPnlPosCol = 0;
-            intPnlPosRow = 0;
+            ////現在のパネル上のポジション
+            //intPnlPosCol = 0;
+            //intPnlPosRow = 0;
 
         }
 
@@ -170,8 +170,8 @@ namespace DQXTarotApp
             }
 
             //テーブルレイアウトパネルクリア
-            intPnlPosCol = 0;
-            intPnlPosRow = 0;
+            int intPnlPosCol = 0;
+            int intPnlPosRow = 0;
             foreach (Control item in tblLayOutPnl.Controls)
             {
                 item.Dispose();
@@ -198,8 +198,13 @@ namespace DQXTarotApp
                 //親のモンスター名をテーブルレイアウトパネルに表示
                 AutoAddLabel(orgStr, intPnlPosCol, intPnlPosRow);
 
+                intPnlPosColBK = 0;
+                intPnlPosRowBK = 0;
+
+               
+
                 //子のモンスター名をテーブルレイアウトパネルに表示
-                AddMonsterNameInPanel(strSozaiMonster1, strSozaiMonster2);
+                //AddMonsterNameInPanel(strSozaiMonster1, strSozaiMonster2,intPnlPosCol,intPnlPosRow);
                 
                 //テキストボックスに素材モンスター名を設定
                 txtBoxSozai_2_1.Text = strSozaiMonster1;
@@ -573,25 +578,48 @@ namespace DQXTarotApp
 
         private System.Windows.Forms.Label lblAuto;
 
-        private void AutoAddLabel(string strName,int intNowCol,int intNowRow)
+        private void AutoAddLabel(string strName, int intNowCol, int intNowRow)
         {
+            //ラベル作成
             lblAuto = new System.Windows.Forms.Label();
             lblAuto.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             lblAuto.Font = new System.Drawing.Font("MS UI Gothic", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             lblAuto.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             lblAuto.Location = new System.Drawing.Point(100, 100);
-            lblAuto.Name = "lblAuto";
             lblAuto.Size = new System.Drawing.Size(180, 34);
             lblAuto.TabIndex = 8;
             lblAuto.Text = strName;
             lblAuto.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
 
+            //テーブルレイアウトパネルラベル追加
+            tblLayOutPnl.Controls.Add(lblAuto, intNowCol, intNowRow);
 
-                tblLayOutPnl.Controls.Add(lblAuto, intNowCol, intNowRow);
+            //strNameをキーとして素材判定関数呼び出し
+            //素材判定関数 CheckSozaiHantei(）呼び出し
+            int intRtn = CheckSozaiHantei(iniPath, strName, out string strSozaiMonster1, out string strSozaiMonster2);
+
+            //関数の戻り値が正常の場合
+            if (intRtn == 0)
+            {
+                //子のモンスター名をテーブルレイアウトパネルに表示
+                AddMonsterNameInPanel(strSozaiMonster1, strSozaiMonster2,intNowCol,intNowRow);
+                
+
+            }
+            else
+            {
+
+            }
+
         }
+
+
 
         private void InsertRow(int intInsertRow)
         {
+            //行挿入関数
+            //引数１：挿入位置（行）
+
             foreach (Control c in tblLayOutPnl.Controls)
             {
                 TableLayoutPanelCellPosition pos = tblLayOutPnl.GetPositionFromControl(c);
@@ -607,7 +635,7 @@ namespace DQXTarotApp
                 }
             }
 
-            //列を増やす
+            //行を増やす
             tblLayOutPnl.RowCount++;
 
             //コントロールを移動
@@ -634,6 +662,9 @@ namespace DQXTarotApp
 
         private void InsertColumn(int intInsertCol)
         {
+            //列挿入関数
+            //引数１：挿入位置（列）
+
             foreach (Control c in tblLayOutPnl.Controls)
             {
                 TableLayoutPanelCellPosition pos = tblLayOutPnl.GetPositionFromControl(c);
@@ -675,29 +706,46 @@ namespace DQXTarotApp
 
         }
 
-        private void AddMonsterNameInPanel(string strKo1,string strKo2)
+        private void AddMonsterNameInPanel(string strKo1, string strKo2, int intPnlPosCol, int intPnlPosRow)
         {
-            //ラベル動的追加
-//            AutoAddLabel(strOya, intPnlPosCol, intPnlPosRow);
+            //テーブルレイアウトパネルにモンスター名追加関数
+            //引数１：子１モンスター名
+            //引数２：子２モンスター名
+            //引数３：テーブルレイアウトパネルの現在位置（列）
+            //引数４：テーブルレイアウトパネルの現在位置（行）
 
-            //テーブルレイアウトパネルの行を追加する。
-            InsertRow(intPnlPosRow);
 
-            //テーブルレイアウトパネルの列を追加する。
+            if (intPnlPosRow > tblLayOutPnl.RowCount)
+            {
+                //intPnlPosRow = intPnlPosRowBK;
+                //テーブルレイアウトパネルの現在行の後ろ挿入する。
+                InsertRow(intPnlPosRow);
+            }
+            //InsertRow(intPnlPosRow);
+
+            //intPnlPosCol = intPnlPosColBK;
+
+            //テーブルレイアウトパネルの現在列のまえに挿入する。
             InsertColumn(intPnlPosCol);
-
-            intPnlPosCol += 1;
-            intPnlPosRow += 2;
 
             //子１ラベル動的追加
-            AutoAddLabel(strKo1, intPnlPosCol - 1, intPnlPosRow);
+            intPnlPosRowBK = intPnlPosRow + 1;
+            AutoAddLabel(strKo1, intPnlPosCol, intPnlPosRow + 1);
 
-            intPnlPosCol += 1;
+            //intPnlPosColBK = intPnlPosCol;
+            //intPnlPosRowBK = intPnlPosRow + 1;
+
             //テーブルレイアウトパネルの列を追加する。
-            InsertColumn(intPnlPosCol);
+            intPnlPosCol = intPnlPosColBK;
+
+            InsertColumn(intPnlPosCol+2);
 
             //子２ラベル動的追加
-            AutoAddLabel(strKo2, intPnlPosCol, intPnlPosRow);
+            intPnlPosColBK += 2;
+            AutoAddLabel(strKo2, intPnlPosCol + 2, intPnlPosRow + 1);
+
+            //intPnlPosColBK = intPnlPosCol + 2;
+//            intPnlPosColBK += 2;
 
         }
 
