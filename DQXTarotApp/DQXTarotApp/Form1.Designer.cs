@@ -77,6 +77,7 @@
             this.line1_2 = new Microsoft.VisualBasic.PowerPacks.LineShape();
             this.line1_1 = new Microsoft.VisualBasic.PowerPacks.LineShape();
             this.tblLayOutPnl = new System.Windows.Forms.TableLayoutPanel();
+            this.btnDetail = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictBox_1_1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictBox_2_1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictBox_2_2)).BeginInit();
@@ -696,12 +697,24 @@
             this.tblLayOutPnl.Size = new System.Drawing.Size(2, 2);
             this.tblLayOutPnl.TabIndex = 8;
             // 
+            // btnDetail
+            // 
+            this.btnDetail.Font = new System.Drawing.Font("MS UI Gothic", 20.14286F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.btnDetail.Location = new System.Drawing.Point(995, 178);
+            this.btnDetail.Name = "btnDetail";
+            this.btnDetail.Size = new System.Drawing.Size(232, 106);
+            this.btnDetail.TabIndex = 9;
+            this.btnDetail.Text = "詳細表示";
+            this.btnDetail.UseVisualStyleBackColor = true;
+            this.btnDetail.Click += new System.EventHandler(this.btnDetail_Click);
+            // 
             // frmMain
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.AutoScroll = true;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(1467, 885);
+            this.Controls.Add(this.btnDetail);
             this.Controls.Add(this.tblLayOutPnl);
             this.Controls.Add(this.pictBox_2_2);
             this.Controls.Add(this.pictBox_3_4);
@@ -814,6 +827,7 @@
         private Microsoft.VisualBasic.PowerPacks.LineShape line3_4;
         private Microsoft.VisualBasic.PowerPacks.LineShape line3_3;
         public System.Windows.Forms.TableLayoutPanel tblLayOutPnl;
+        private System.Windows.Forms.Button btnDetail;
     }
 }
 
